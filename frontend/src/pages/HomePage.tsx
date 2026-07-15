@@ -12,7 +12,7 @@ export default function HomePage() {
   const services = useServices().filter((s) => s.active).slice(0, 6);
 
   useEffect(() => {
-    document.title = "galeo tek — Tecnología integral en Armenia, Quindío";
+    document.title = "KAIZEN LAB — Posters metálicos y cuadros premium";
   }, []);
 
   return (
@@ -26,29 +26,29 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            <span>Tecnología integral en {SITE.city}</span>
+            <span>Decoración premium en {SITE.city}</span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
             className="mt-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">
-            Soluciones tecnológicas para tu{" "}
-            <span className="gradient-text text-glow-neon">hogar y negocio</span>
+            Posters metálicos y cuadros de aluminio para{" "}
+            <span className="gradient-text text-glow-neon">espacios con personalidad</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
             className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            {SITE.subtitle}. Acompañamiento real, claro y profesional.
+            {SITE.subtitle}. Diseño exclusivo, montaje impecable y una estética que transforma cualquier pared.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
             className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 gap-2 bg-[var(--gradient-primary)] px-6 text-primary-foreground shadow-glow hover:opacity-95">
               <a href={waLink()} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-5 w-5" /> Solicitar servicio
+                <MessageCircle className="h-5 w-5" /> Pedir mi diseño
               </a>
             </Button>
             <Button asChild size="lg" variant="outline" className="h-12 gap-2 border-white/15 bg-white/5 px-6 text-foreground hover:bg-white/10">
-              <Link to="/servicios">Ver servicios <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/servicios">Ver colecciones <ArrowRight className="h-4 w-4" /></Link>
             </Button>
           </motion.div>
 
@@ -59,10 +59,10 @@ export default function HomePage() {
               <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-accent/20 blur-3xl" />
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {[
-                  { k: "+5", l: "años de experiencia" },
-                  { k: "100%", l: "garantía" },
-                  { k: "24/7", l: "soporte WhatsApp" },
-                  { k: "Quindío", l: "cobertura" },
+                  { k: "100%", l: "material premium" },
+                  { k: "24 h", l: "respuesta rápida" },
+                  { k: "Personal", l: "diseño a medida" },
+                  { k: "Envío", l: "nacional" },
                 ].map((s) => (
                   <div key={s.l} className="text-left">
                     <div className="text-2xl font-bold text-primary text-glow">{s.k}</div>
@@ -77,9 +77,9 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="mb-10 flex flex-col items-center text-center">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary">Servicios</span>
-          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Todo lo que tu hogar y negocio necesitan</h2>
-          <p className="mt-3 max-w-xl text-sm text-muted-foreground">Un solo aliado para tu tecnología. Sin enredos, sin sorpresas.</p>
+          <span className="text-xs uppercase tracking-[0.2em] text-primary">Colecciones</span>
+          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Diseños pensados para destacar</h2>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground">Desde posters metálicos hasta cuadros premium con acabados impecables para gamers, oficinas y setups.</p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -93,7 +93,7 @@ export default function HomePage() {
               <h3 className="text-lg font-semibold">{s.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.description}</p>
               <Link to="/servicios" className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:gap-2 transition-all">
-                Más información <ArrowRight className="h-4 w-4" />
+                Ver detalle <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
           ))}
@@ -106,13 +106,13 @@ export default function HomePage() {
           <div className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-accent/15 blur-3xl" />
           <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
             <div>
-              <span className="text-xs uppercase tracking-[0.2em] text-accent">Paquete destacado</span>
-              <h3 className="mt-2 text-3xl font-bold sm:text-4xl">Hogar en Orden</h3>
+              <span className="text-xs uppercase tracking-[0.2em] text-accent">Propuesta destacada</span>
+              <h3 className="mt-2 text-3xl font-bold sm:text-4xl">Decoración premium para tu espacio</h3>
               <p className="mt-3 text-muted-foreground">
-                Todo lo esencial para que tu casa funcione perfecto: revisión eléctrica, mantenimiento de equipos y asesoría de seguridad. En una sola visita.
+                Creamos posters metálicos y cuadros de aluminio con acabados de alto impacto para gaming, oficinas, motos, anime y ambientes modernos.
               </p>
               <ul className="mt-6 space-y-2.5">
-                {["Revisión eléctrica completa","Mantenimiento de 1 computador","Asesoría de cámaras de seguridad","Soporte por WhatsApp 30 días"].map((b) => (
+                {["Diseños a medida","Material de aluminio premium","Montaje limpio y seguro","Asesoría rápida por WhatsApp"].map((b) => (
                   <li key={b} className="flex items-start gap-2 text-sm">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 text-accent" /><span>{b}</span>
                   </li>
@@ -120,20 +120,20 @@ export default function HomePage() {
               </ul>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button asChild className="bg-[var(--gradient-primary)] text-primary-foreground shadow-glow">
-                  <a href={waLink("Hola, me interesa el paquete Hogar en Orden.")} target="_blank" rel="noopener noreferrer">Solicitar paquete</a>
+                  <a href={waLink("Hola, me interesa un poster o cuadro de aluminio personalizado.")} target="_blank" rel="noopener noreferrer">Solicitar cotización</a>
                 </Button>
                 <Button asChild variant="outline" className="border-white/15 bg-white/5">
-                  <Link to="/paquetes">Ver todos los paquetes</Link>
+                  <Link to="/paquetes">Ver opciones</Link>
                 </Button>
               </div>
             </div>
             <div className="relative">
               <div className="glass rounded-2xl p-6">
                 <div className="flex items-baseline gap-2"><span className="text-4xl font-bold gradient-text">Desde</span></div>
-                <div className="mt-1 text-5xl font-bold text-glow">$199.000</div>
-                <p className="mt-2 text-xs text-muted-foreground">COP · Una sola visita programada</p>
+                <div className="mt-1 text-5xl font-bold text-glow">Desde $120.000</div>
+                <p className="mt-2 text-xs text-muted-foreground">COP · Diseño y producción según tamaño</p>
                 <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-                  {["Eléctrico", "Computo", "Seguridad"].map((t) => (
+                  {["Metal", "Personalizado", "Montaje"].map((t) => (
                     <div key={t} className="rounded-lg border border-white/10 bg-white/5 px-2 py-3 text-xs">{t}</div>
                   ))}
                 </div>
@@ -145,8 +145,8 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
         <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-[var(--gradient-primary)] p-8 text-center shadow-glow">
-          <h3 className="text-2xl font-bold text-primary-foreground sm:text-3xl">¿Listo para resolver tu tecnología hoy?</h3>
-          <p className="mt-2 text-primary-foreground/80">Escríbenos por WhatsApp y te asesoramos sin compromiso.</p>
+          <h3 className="text-2xl font-bold text-primary-foreground sm:text-3xl">¿Listo para transformar tu pared?</h3>
+          <p className="mt-2 text-primary-foreground/80">Escríbenos por WhatsApp y diseñamos tu poster o cuadro de aluminio ideal.</p>
           <Button asChild size="lg" className="mt-5 h-12 gap-2 bg-background text-foreground hover:bg-background/90">
             <a href={waLink()} target="_blank" rel="noopener noreferrer">
               <MessageCircle className="h-5 w-5" /> Hablar por WhatsApp

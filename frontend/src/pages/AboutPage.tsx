@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import { Cpu, HeartHandshake, ShieldCheck, Sparkles } from "lucide-react";
+import { Frame, HeartHandshake, Sparkles, Star } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SITE } from "@/lib/site";
 
 const VALUES = [
-  { icon: Sparkles, title: "Claridad", text: "Hablamos sin tecnicismos innecesarios. Entiendes qué se hace y por qué." },
-  { icon: ShieldCheck, title: "Soluciones reales", text: "Resolvemos el problema de fondo, no parches que duran un par de semanas." },
-  { icon: HeartHandshake, title: "Acompañamiento", text: "No desaparecemos al terminar. Soporte y asesoría continua después del servicio." },
+  { icon: Sparkles, title: "Diseño premium", text: "Cada pieza se diseña para sentirse exclusiva, limpia y con alto impacto visual." },
+  { icon: Star, title: "Calidad superior", text: "Trabajamos con materiales resistentes y acabados cuidadosamente seleccionados." },
+  { icon: HeartHandshake, title: "Atención cercana", text: "Te acompañamos desde la idea hasta el montaje para que el resultado sea perfecto." },
 ];
 
 export default function AboutPage() {
-  useEffect(() => { document.title = "Nosotros — galeo tek"; }, []);
+  useEffect(() => { document.title = "Nosotros — KAIZEN LAB"; }, []);
   return (
     <SiteLayout>
       <section className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-20">
@@ -18,20 +18,19 @@ export default function AboutPage() {
           <div>
             <span className="text-xs uppercase tracking-[0.2em] text-primary">Sobre nosotros</span>
             <h1 className="mt-2 text-4xl font-bold sm:text-5xl">
-              Tecnología <span className="gradient-text">cercana</span> y profesional
+              Decoración <span className="gradient-text">premium</span> con identidad propia
             </h1>
             <p className="mt-4 text-muted-foreground">
-              {SITE.name} nace para resolver, en un solo lugar, todo lo tecnológico que tu hogar y tu emprendimiento necesitan.
-              Combinamos software, electricidad, seguridad y asesoría con un trato humano y honesto.
+              {SITE.name} nace para llevar diseños de alto impacto a espacios cotidianos. Creamos posters metálicos y cuadros de aluminio que combinan estética, calidad y personalidad.
             </p>
-            <p className="mt-3 text-muted-foreground">Atendemos en {SITE.coverage}, con disponibilidad por WhatsApp y visitas programadas.</p>
+            <p className="mt-3 text-muted-foreground">Atendemos pedidos personalizados y {SITE.coverage.toLowerCase()}.</p>
           </div>
           <div className="relative">
             <div className="absolute -inset-6 -z-10 rounded-3xl bg-[var(--gradient-primary)] opacity-30 blur-2xl" />
             <div className="glass relative flex aspect-square items-center justify-center rounded-3xl">
               <div className="absolute inset-0 bg-grid opacity-30 rounded-3xl" />
               <div className="relative grid h-32 w-32 place-items-center rounded-2xl bg-[var(--gradient-primary)] shadow-glow animate-pulse-glow">
-                <Cpu className="h-16 w-16 text-primary-foreground" />
+                <Frame className="h-16 w-16 text-primary-foreground" />
               </div>
             </div>
           </div>

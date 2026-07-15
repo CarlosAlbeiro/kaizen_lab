@@ -9,16 +9,16 @@ import { waLink } from "@/lib/site";
 
 export default function ServicesPage() {
   const services = useServices().filter((s) => s.active);
-  useEffect(() => { document.title = "Servicios — galeo tek"; }, []);
+  useEffect(() => { document.title = "Colecciones — KAIZEN LAB"; }, []);
 
   return (
     <SiteLayout>
       <section className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-20">
         <div className="text-center">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary">Servicios</span>
-          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Lo que hacemos por ti</h1>
+          <span className="text-xs uppercase tracking-[0.2em] text-primary">Colecciones</span>
+          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Piezas que elevan tu espacio</h1>
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-            Cada servicio incluye diagnóstico claro, presupuesto sin sorpresas y acompañamiento real.
+            Explora posters metálicos, cuadros premium y formatos especiales para gaming, motos, anime, oficinas y setups.
           </p>
         </div>
       </section>
@@ -36,14 +36,14 @@ export default function ServicesPage() {
               <p className="mt-2 flex-1 text-sm text-muted-foreground">{s.description}</p>
               <Button asChild size="sm" variant="outline" className="mt-5 w-fit gap-2 border-white/15 bg-white/5">
                 <a href={waLink(`Hola, me interesa el servicio: ${s.title}.`)} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-4 w-4" /> Más información
+                  <MessageCircle className="h-4 w-4" /> Cotizar pieza
                 </a>
               </Button>
             </motion.div>
           ))}
         </div>
         {services.length === 0 && (
-          <p className="mt-10 text-center text-sm text-muted-foreground">No hay servicios disponibles en este momento.</p>
+          <p className="mt-10 text-center text-sm text-muted-foreground">Próximamente tendremos nuevas colecciones disponibles.</p>
         )}
       </section>
     </SiteLayout>

@@ -10,7 +10,7 @@ export function WhatsAppFAB() {
 
   const handleSolicitar = () => {
     if (!number.trim()) return;
-    const message = `Hola galeo tek, quisiera solicitar asesoría. Mi número es: ${number}`;
+    const message = `Hola KAIZEN LAB, quisiera cotizar un poster o cuadro de aluminio. Mi número es: ${number}`;
     window.open(waLink(message), "_blank");
   };
 
@@ -26,7 +26,7 @@ export function WhatsAppFAB() {
       </PopoverTrigger>
       <PopoverContent side="top" align="end" className="w-80 bg-white text-black p-4 mb-2 shadow-xl border-none">
         <p className="text-sm font-medium mb-3 leading-tight">
-          Diligencia tu numero de whatsapp con el indicador de tu pais para solicitar asesoria ejemplo: +573123456789
+          Escribe tu número de WhatsApp para cotizar tu poster o cuadro de aluminio. Ejemplo: +573123456789
         </p>
         <div className="flex flex-col gap-3">
           <Input 
@@ -37,7 +37,7 @@ export function WhatsAppFAB() {
             className="border-gray-300 text-black placeholder:text-gray-400 focus-visible:ring-gray-400"
           />
           <Button onClick={handleSolicitar} className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white">
-            Solicitar
+            Cotizar
           </Button>
         </div>
       </PopoverContent>

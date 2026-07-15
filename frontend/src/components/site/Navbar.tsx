@@ -1,12 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Menu, X, Cpu } from "lucide-react";
+import { Menu, Sparkles, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import profileImage from "@/assets/logo.png";
 
 const links = [
   { to: "/", label: "Inicio" },
-  { to: "/servicios", label: "Servicios" },
+  { to: "/servicios", label: "Colecciones" },
   { to: "/paquetes", label: "Paquetes" },
   { to: "/nosotros", label: "Nosotros" },
   { to: "/contacto", label: "Contacto" },
@@ -32,13 +32,9 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <img
-              src={profileImage}
-              alt="Galeo Tek"
-              className="h-20 w-20 object-contain drop-shadow-md"
-            />
+          <img src={profileImage} alt="KAIZEN LAB" className="h-16 w-16 object-contain drop-shadow-md" />
           <span className="text-base sm:text-lg">
-            galeo<span className="text-primary"> tek</span>
+            KAIZEN <span className="text-primary">LAB</span>
           </span>
         </Link>
 
@@ -51,16 +47,13 @@ export function Navbar() {
               className={({ isActive }) =>
                 cn(
                   "rounded-md px-3 py-2 text-sm transition-colors",
-                  isActive
-                    ? "text-foreground bg-white/5"
-                    : "text-muted-foreground hover:text-foreground",
+                  isActive ? "bg-white/5 text-foreground" : "text-muted-foreground hover:text-foreground",
                 )
               }
             >
               {l.label}
             </NavLink>
           ))}
-
         </nav>
 
         <button
@@ -83,16 +76,12 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 end={l.to === "/"}
                 className={({ isActive }) =>
-                  cn(
-                    "rounded-md px-3 py-3 text-sm",
-                    isActive ? "text-foreground bg-white/5" : "text-muted-foreground",
-                  )
+                  cn("rounded-md px-3 py-3 text-sm", isActive ? "bg-white/5 text-foreground" : "text-muted-foreground")
                 }
               >
                 {l.label}
               </NavLink>
             ))}
-
           </nav>
         </div>
       )}

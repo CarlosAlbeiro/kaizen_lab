@@ -5,26 +5,26 @@ import { Button } from "@/components/ui/button";
 import { waLink } from "@/lib/site";
 
 const PACKAGES = [
-  { id: "hogar", name: "Hogar en Orden", tag: "Más popular", price: "$199.000",
-    description: "Todo lo esencial para tu casa en una sola visita.",
-    features: ["Revisión eléctrica completa","Mantenimiento de 1 computador","Asesoría de cámaras","Soporte WhatsApp 30 días"], highlight: true },
-  { id: "empre", name: "Emprendedor Digital", price: "$499.000",
-    description: "Lanza tu negocio online con identidad y tecnología sólida.",
-    features: ["Página web (1 sección)","Dominio y correo profesional","Configuración de redes","Capacitación 1 hora"], highlight: false },
-  { id: "seg", name: "Seguridad Total", price: "$899.000",
-    description: "Protege tu hogar o local con un sistema profesional.",
-    features: ["4 cámaras HD instaladas","Acceso desde el celular","DVR + cableado","Garantía 6 meses"], highlight: false },
+  { id: "premium", name: "Poster Metálico Premium", tag: "Más pedido", price: "Desde $120.000",
+    description: "Diseño exclusivo para una pieza que se ve y se siente premium.",
+    features: ["Impresión de alta calidad","Acabado en aluminio","Envío nacional","Asesoría de diseño"], highlight: true },
+  { id: "setup", name: "Cuadro para Setup", price: "Desde $180.000",
+    description: "Ideal para gamers, oficinas y espacios con estética moderna.",
+    features: ["Formato personalizado","Montaje limpio","Estilo minimalista o agresivo","Entrega rápida"], highlight: false },
+  { id: "custom", name: "Diseño a Medida", price: "Cotización especial",
+    description: "Creamos una pieza única según tu idea, marca o referencia.",
+    features: ["Concepto personalizado","Ajuste de colores y tamaño","Opciones premium","Soporte por WhatsApp"], highlight: false },
 ];
 
 export default function PackagesPage() {
-  useEffect(() => { document.title = "Paquetes — galeo tek"; }, []);
+  useEffect(() => { document.title = "Paquetes — KAIZEN LAB"; }, []);
   return (
     <SiteLayout>
       <section className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-20">
         <div className="text-center">
           <span className="text-xs uppercase tracking-[0.2em] text-primary">Paquetes</span>
-          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Soluciones combinadas</h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">Mezclamos lo mejor de cada servicio para darte más por menos.</p>
+          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Opciones pensadas para tu estilo</h1>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">Elige la propuesta que mejor se adapte a tu espacio, gusto y presupuesto.</p>
         </div>
       </section>
 
@@ -54,7 +54,7 @@ export default function PackagesPage() {
               <Button asChild className={"mt-6 gap-2 " + (p.highlight ? "bg-[var(--gradient-primary)] text-primary-foreground shadow-glow"
                 : "border border-white/15 bg-white/5 text-foreground hover:bg-white/10")}
                 variant={p.highlight ? "default" : "outline"}>
-                <a href={waLink(`Hola, me interesa el paquete ${p.name}.`)} target="_blank" rel="noopener noreferrer">
+                <a href={waLink(`Hola, me interesa ${p.name}.`)} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="h-4 w-4" /> Solicitar
                 </a>
               </Button>

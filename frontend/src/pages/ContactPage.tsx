@@ -14,13 +14,13 @@ export default function ContactPage() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => { document.title = "Contacto — galeo tek"; }, []);
+  useEffect(() => { document.title = "Contacto — KAIZEN LAB"; }, []);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) { toast.error("Por favor completa nombre y mensaje."); return; }
     setLoading(true);
-    const text = `Hola galeo tek, soy ${name}${email ? ` (${email})` : ""}. ${message}`;
+    const text = `Hola KAIZEN LAB, soy ${name}${email ? ` (${email})` : ""}. ${message}`;
     window.open(waLink(text), "_blank");
     setTimeout(() => {
       setLoading(false);
@@ -34,9 +34,9 @@ export default function ContactPage() {
       <section className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-20">
         <div className="text-center">
           <span className="text-xs uppercase tracking-[0.2em] text-primary">Contacto</span>
-          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Hablemos</h1>
+          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Hablemos de tu próximo diseño</h1>
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-            Escríbenos y te respondemos rápido. Cobertura en {SITE.coverage}.
+            Cuéntanos qué quieres decorar y te ayudamos a elegir el poster o cuadro ideal. {SITE.coverage}.
           </p>
         </div>
       </section>
@@ -44,7 +44,7 @@ export default function ContactPage() {
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
         <div className="grid gap-6 md:grid-cols-5">
           <form onSubmit={onSubmit} className="rounded-2xl border border-white/10 bg-card/60 p-6 backdrop-blur md:col-span-3">
-            <h2 className="text-lg font-semibold">Cuéntanos qué necesitas</h2>
+            <h2 className="text-lg font-semibold">Cuéntanos qué buscas</h2>
             <div className="mt-5 grid gap-4">
               <div>
                 <Label htmlFor="name">Nombre</Label>
@@ -56,7 +56,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <Label htmlFor="msg">Mensaje</Label>
-                <Textarea id="msg" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Cuéntanos qué servicio te interesa…" rows={5} className="mt-1.5 bg-background/50" />
+                <Textarea id="msg" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Ej: Quiero un poster metálico para mi setup con estilo gamer…" rows={5} className="mt-1.5 bg-background/50" />
               </div>
               <Button type="submit" disabled={loading} className="gap-2 bg-[var(--gradient-primary)] text-primary-foreground shadow-glow">
                 <Send className="h-4 w-4" />{loading ? "Enviando…" : "Enviar por WhatsApp"}

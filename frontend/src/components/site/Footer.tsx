@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Cpu, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
 import profileImage from "@/assets/logo.png";
 
@@ -9,17 +9,13 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <Link to="/" className="flex items-center gap-2">
-          <img
-              src={profileImage}
-              alt="Galeo Tek"
-              className="h-20 w-20 object-contain drop-shadow-md"
-            />
+            <img src={profileImage} alt="KAIZEN LAB" className="h-16 w-16 object-contain drop-shadow-md" />
             <span className="text-lg font-semibold">
-              galeo <span className="text-primary">tek</span>
+              KAIZEN <span className="text-primary">LAB</span>
             </span>
           </Link>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            {SITE.subtitle}. Cobertura en {SITE.coverage}.
+            {SITE.subtitle}. {SITE.coverage}.
           </p>
         </div>
 
@@ -28,7 +24,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li>
               <Link to="/servicios" className="hover:text-foreground">
-                Servicios
+                Colecciones
               </Link>
             </li>
             <li>
@@ -72,8 +68,8 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:px-6">
-          <p>© {new Date().getFullYear()} galeo tek<Link to="/admin/login">.</Link> Todos los derechos reservados.</p>
-          <p>Hecho con tecnología en {SITE.city}.</p>
+          <p>© {new Date().getFullYear()} KAIZEN LAB<Link to="/admin/login">.</Link> Todos los derechos reservados.</p>
+          <p>Decoración premium en {SITE.city}.</p>
         </div>
       </div>
     </footer>

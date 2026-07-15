@@ -27,7 +27,7 @@ export default function AdminLayout() {
               <Cpu className="h-5 w-5 text-primary-foreground" />
             </span>
             <div>
-              <div className="text-sm font-semibold">galeo tek Admin</div>
+              <div className="text-sm font-semibold">KAIZEN LAB Admin</div>
               <div className="text-[11px] text-muted-foreground">Panel de control</div>
             </div>
           </Link>
@@ -59,7 +59,7 @@ export default function AdminLayout() {
               <span className="grid h-8 w-8 place-items-center rounded-lg bg-[var(--gradient-primary)]">
                 <Cpu className="h-4 w-4 text-primary-foreground" />
               </span>
-              <span className="text-sm font-semibold">galeo tek Admin</span>
+              <span className="text-sm font-semibold">KAIZEN LAB Admin</span>
             </Link>
             <Button size="sm" variant="outline" className="border-white/10 bg-white/5" onClick={onLogout}>
               <LogOut className="h-4 w-4" />

@@ -15,7 +15,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = "Admin · Iniciar sesión — galeo tek";
+    document.title = "Admin · Iniciar sesión — KAIZEN LAB";
     if (isAuthed()) nav("/admin", { replace: true });
   }, [nav]);
 
@@ -48,7 +48,7 @@ export default function LoginPage() {
           <span className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--gradient-primary)] shadow-glow animate-pulse-glow">
             <Cpu className="h-6 w-6 text-primary-foreground" />
           </span>
-          <span className="text-xl font-bold">galeo <span className="text-primary">tek</span></span>
+          <span className="text-xl font-bold">KAIZEN <span className="text-primary">LAB</span></span>
         </div>
 
         <div className="glass rounded-2xl p-7 shadow-card">
@@ -85,7 +85,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground">Acceso restringido a administradores de galeo tek.</p>
+        <p className="mt-4 text-center text-xs text-muted-foreground">Acceso restringido a administradores de KAIZEN LAB.</p>
       </div>
     </div>
   );
