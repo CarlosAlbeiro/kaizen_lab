@@ -6,6 +6,7 @@ import profileImage from "@/assets/logo.png";
 
 const links = [
   { to: "/", label: "Inicio" },
+  { to: "/catalogo", label: "Catálogo" },
   { to: "/servicios", label: "Colecciones" },
   { to: "/paquetes", label: "Paquetes" },
   { to: "/nosotros", label: "Nosotros" },
@@ -32,7 +33,11 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <img src={profileImage} alt="KAIZEN LAB" className="h-16 w-16 object-contain drop-shadow-md" />
+          <img
+            src={profileImage}
+            alt="KAIZEN LAB"
+            className="h-16 w-16 object-contain drop-shadow-md"
+          />
           <span className="text-base sm:text-lg">
             KAIZEN <span className="text-primary">LAB</span>
           </span>
@@ -46,8 +51,10 @@ export function Navbar() {
               end={l.to === "/"}
               className={({ isActive }) =>
                 cn(
-                  "rounded-md px-3 py-2 text-sm transition-colors",
-                  isActive ? "bg-white/5 text-foreground" : "text-muted-foreground hover:text-foreground",
+                  "relative overflow-hidden rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-300",
+                  isActive
+                    ? "border border-primary/50 bg-primary/10 text-primary drop-shadow-[0_0_8px_rgba(220,38,38,0.8)] shadow-[inset_0_0_10px_rgba(220,38,38,0.2)]"
+                    : "border border-transparent text-muted-foreground hover:border-white/10 hover:bg-white/5 hover:text-foreground",
                 )
               }
             >
@@ -76,7 +83,10 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 end={l.to === "/"}
                 className={({ isActive }) =>
-                  cn("rounded-md px-3 py-3 text-sm", isActive ? "bg-white/5 text-foreground" : "text-muted-foreground")
+                  cn(
+                    "rounded-md px-3 py-3 text-sm",
+                    isActive ? "bg-white/5 text-foreground" : "text-muted-foreground",
+                  )
                 }
               >
                 {l.label}

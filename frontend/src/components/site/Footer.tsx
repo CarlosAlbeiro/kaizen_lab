@@ -9,7 +9,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <Link to="/" className="flex items-center gap-2">
-            <img src={profileImage} alt="KAIZEN LAB" className="h-16 w-16 object-contain drop-shadow-md" />
+            <img
+              src={profileImage}
+              alt="KAIZEN LAB"
+              className="h-16 w-16 object-contain drop-shadow-md"
+            />
             <span className="text-lg font-semibold">
               KAIZEN <span className="text-primary">LAB</span>
             </span>
@@ -68,7 +72,10 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:px-6">
-          <p>© {new Date().getFullYear()} KAIZEN LAB<Link to="/admin/login">.</Link> Todos los derechos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} KAIZEN LAB<Link to="/admin/login">.</Link> Todos los
+            derechos reservados.
+          </p>
           <p>Decoración premium en {SITE.city}.</p>
         </div>
       </div>

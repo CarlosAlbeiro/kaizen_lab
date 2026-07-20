@@ -38,7 +38,7 @@ export async function login(username: string, password: string): Promise<boolean
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
-    
+
     if (res.ok) {
       window.localStorage.setItem(AUTH_KEY, "1");
       emit();
@@ -74,7 +74,7 @@ async function fetchServices() {
     const res = await fetch(`${API_URL}/services`);
     if (res.ok) {
       const data = await res.json();
-      // Ensure IDs are strings for frontend consistency if needed, 
+      // Ensure IDs are strings for frontend consistency if needed,
       // but backend returns numbers now.
       services = data.map((s: any) => ({ ...s, id: String(s.id) }));
       isInitialLoaded = true;

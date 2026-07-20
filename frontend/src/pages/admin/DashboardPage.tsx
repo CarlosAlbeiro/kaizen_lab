@@ -25,16 +25,25 @@ export default function DashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
-          <div key={s.label} className="relative overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-5 backdrop-blur">
+          <div
+            key={s.label}
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-card/60 p-5 backdrop-blur"
+          >
             <div className="flex items-start justify-between">
               <div>
-                <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.label}</div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  {s.label}
+                </div>
                 <div className="mt-2 text-3xl font-bold">{s.value}</div>
               </div>
-              <div className={"grid h-10 w-10 place-items-center rounded-xl " +
-                (s.accent === "neon"
-                  ? "bg-[var(--gradient-neon)] text-[var(--neon-foreground)] shadow-glow-neon"
-                  : "bg-[var(--gradient-primary)] text-primary-foreground shadow-glow")}>
+              <div
+                className={
+                  "grid h-10 w-10 place-items-center rounded-xl " +
+                  (s.accent === "neon"
+                    ? "bg-[var(--gradient-neon)] text-[var(--neon-foreground)] shadow-glow-neon"
+                    : "bg-[var(--gradient-primary)] text-primary-foreground shadow-glow")
+                }
+              >
                 <s.icon className="h-5 w-5" />
               </div>
             </div>
@@ -47,7 +56,9 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">Servicios recientes</h2>
             <Button asChild size="sm" variant="outline" className="border-white/10 bg-white/5">
-              <Link to="/admin/servicios" className="gap-1">Gestionar <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+              <Link to="/admin/servicios" className="gap-1">
+                Gestionar <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
             </Button>
           </div>
           <ul className="mt-4 divide-y divide-white/5">
@@ -60,8 +71,12 @@ export default function DashboardPage() {
                   <div className="truncate text-sm font-medium">{s.title}</div>
                   <div className="truncate text-xs text-muted-foreground">{s.description}</div>
                 </div>
-                <span className={"rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase " +
-                  (s.active ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground")}>
+                <span
+                  className={
+                    "rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase " +
+                    (s.active ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground")
+                  }
+                >
                   {s.active ? "Activo" : "Inactivo"}
                 </span>
               </li>
@@ -73,13 +88,25 @@ export default function DashboardPage() {
           <h2 className="text-lg font-semibold">Atajos</h2>
           <p className="mt-1 text-sm opacity-80">Acciones frecuentes</p>
           <div className="mt-4 space-y-2">
-            <Button asChild variant="secondary" className="w-full justify-start bg-background/90 text-foreground hover:bg-background">
+            <Button
+              asChild
+              variant="secondary"
+              className="w-full justify-start bg-background/90 text-foreground hover:bg-background"
+            >
               <Link to="/admin/servicios">+ Nuevo servicio</Link>
             </Button>
-            <Button asChild variant="secondary" className="w-full justify-start bg-background/90 text-foreground hover:bg-background">
+            <Button
+              asChild
+              variant="secondary"
+              className="w-full justify-start bg-background/90 text-foreground hover:bg-background"
+            >
               <Link to="/admin/ajustes">Editar contenido</Link>
             </Button>
-            <Button asChild variant="secondary" className="w-full justify-start bg-background/90 text-foreground hover:bg-background">
+            <Button
+              asChild
+              variant="secondary"
+              className="w-full justify-start bg-background/90 text-foreground hover:bg-background"
+            >
               <Link to="/">Ver sitio público</Link>
             </Button>
           </div>

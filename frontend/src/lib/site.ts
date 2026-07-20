@@ -9,5 +9,6 @@ export const SITE = {
   coverage: "Envíos y pedidos personalizados a nivel nacional",
 } as const;
 
-export const waLink = (message = "Hola KAIZEN LAB, me interesa un poster metálico o cuadro personalizado.") =>
-  `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
+export const waLink = (
+  message = "Hola KAIZEN LAB, me interesa un poster metálico o cuadro personalizado.",
+) => `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
