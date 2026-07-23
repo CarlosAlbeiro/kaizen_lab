@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, MessageCircle, Sparkles } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ServiceIcon } from "@/components/site/ServiceIcon";
+import { CuadrosCarousel } from "@/components/site/CuadrosCarousel";
 import { Button } from "@/components/ui/button";
 import { useServices } from "@/lib/admin-store";
 import { useCatalogCollections, useCatalogProducts } from "@/lib/catalog";
@@ -254,61 +255,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Carrusel de Productos Destacados */}
-      {products.length > 0 && (
-        <section className="py-20 overflow-hidden bg-black/20 border-y border-white/5">
-          <div className="mb-10 flex flex-col items-center text-center px-4">
-            <span className="text-xs uppercase tracking-[0.2em] text-accent">Nuestras Obras</span>
-            <h2 className="mt-2 text-3xl font-bold sm:text-4xl">Cuadros que inspiran</h2>
-          </div>
-
-          <div className="relative w-full flex overflow-hidden group">
-            {/* Gradientes laterales para suavizar la entrada/salida */}
-            <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-background to-transparent" />
-            <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-background to-transparent" />
-
-            <motion.div
-              className="flex gap-6 px-3"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ ease: "linear", duration: products.length * 5, repeat: Infinity }}
-            >
-              {[...products, ...products, ...products].map((p, i) => (
-                <div
-                  key={`${p.id}-${i}`}
-                  className="w-64 md:w-80 shrink-0 relative overflow-hidden rounded-2xl border border-white/10 bg-card/40 aspect-[3/4] group-hover:opacity-75 hover:!opacity-100 transition-opacity duration-300"
-                >
-                  {p.image_url ? (
-                    <img src={p.image_url} alt={p.name} className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="h-full w-full bg-black/50 flex items-center justify-center">
-                      <span className="text-muted-foreground">Sin imagen</span>
-                    </div>
-                  )}
-                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 pt-12">
-                    <h4 className="text-lg font-bold text-white leading-tight">{p.name}</h4>
-                    {p.price && (
-                      <p className="text-sm text-primary font-semibold mt-1">
-                        ${Number(p.price).toLocaleString("es-CO")}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Button
-              asChild
-              variant="outline"
-              className="border-white/10 bg-white/5 hover:bg-white/10 text-foreground"
-            >
-              <Link to="/catalogo">
-                Ver catálogo completo <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </section>
-      )}
+      {/* Carrusel de Productos / Cuadros Metálicos Destacados */}
+      <CuadrosCarousel />
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-card/60 p-8 backdrop-blur shadow-card sm:p-12">

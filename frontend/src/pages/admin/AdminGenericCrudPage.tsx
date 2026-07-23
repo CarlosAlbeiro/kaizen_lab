@@ -123,7 +123,7 @@ export function AdminGenericCrudPage({ title, description, columns, fields, useD
             {fields.map(f => (
               <div key={f.id}>
                 <Label htmlFor={f.id}>{f.label}</Label>
-                <Input id={f.id} type={f.type} value={draft[f.id] || ""} onChange={(e) => setDraft({ ...draft, [f.id]: e.target.value })} className="mt-1.5 bg-background/50" />
+                <Input id={f.id} type={f.type} value={draft[f.id] || ""} onChange={(e) => setDraft({ ...draft, [f.id]: e.target.value })} className="mt-1.5 bg-white text-black" />
               </div>
             ))}
             

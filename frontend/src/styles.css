@@ -115,14 +115,19 @@
     letter-spacing: -0.02em;
   }
 
-  /* Fix browser autofill colors in dark mode */
+  /* Fix browser autofill colors in dark mode to black text on white background */
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
-    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+    -webkit-text-fill-color: #000000 !important;
     transition: background-color 5000s ease-in-out 0s;
+  }
+
+  select {
+    color: #000000;
+    background-color: #ffffff;
   }
 }
 

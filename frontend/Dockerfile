@@ -7,6 +7,6 @@ RUN npm run build
 
 RUN npm install -g serve
 
-EXPOSE 8088
+EXPOSE 8093
 
-CMD ["serve", "-s", "dist", "-l", "8088"]
+CMD ["serve", "-s", "dist", "-l", "8093"]

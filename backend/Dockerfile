@@ -30,11 +30,11 @@ RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist
 
 # Set environment variables (can be overridden at runtime)
-ENV PORT=3001
+ENV PORT=3055
 ENV NODE_ENV=production
 
 # Expose the port the app runs on
-EXPOSE 3001
+EXPOSE 3055
 
 # Command to run the application
 CMD ["npm", "start"]
