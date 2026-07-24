@@ -3,9 +3,15 @@ import { useState, useEffect } from "react";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 async function mutateJson<T>(path: string, method: string, body?: any): Promise<T> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("cab_admin_jwt_token_v1") : null;
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API_URL}${path}`, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: body ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) {

@@ -32,6 +32,7 @@ COPY --from=builder /app/dist ./dist
 # Set environment variables (can be overridden at runtime)
 ENV PORT=3055
 ENV NODE_ENV=production
+ENV JWT_SECRET=kaizen_lab_super_secret_jwt_key_2026_production
 
 # Expose the port the app runs on
 EXPOSE 3055

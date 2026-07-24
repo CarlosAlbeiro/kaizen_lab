@@ -4,6 +4,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 const AUTH_KEY = "cab_admin_auth_v1";
+const TOKEN_KEY = "cab_admin_jwt_token_v1";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 export type ServiceItem = {
@@ -26,9 +27,14 @@ const emit = () => listeners.forEach((l) => l());
 const isBrowser = () => typeof window !== "undefined";
 
 // ---------- auth ----------
+export function getToken(): string | null {
+  if (!isBrowser()) return null;
+  return window.localStorage.getItem(TOKEN_KEY);
+}
+
 export function isAuthed(): boolean {
   if (!isBrowser()) return false;
-  return window.localStorage.getItem(AUTH_KEY) === "1";
+  return Boolean(window.localStorage.getItem(TOKEN_KEY) || window.localStorage.getItem(AUTH_KEY) === "1");
 }
 
 export async function login(username: string, password: string): Promise<boolean> {
@@ -40,6 +46,10 @@ export async function login(username: string, password: string): Promise<boolean
     });
 
     if (res.ok) {
+      const data = await res.json();
+      if (data.token) {
+        window.localStorage.setItem(TOKEN_KEY, data.token);
+      }
       window.localStorage.setItem(AUTH_KEY, "1");
       emit();
       return true;
@@ -52,6 +62,7 @@ export async function login(username: string, password: string): Promise<boolean
 
 export function logout() {
   window.localStorage.removeItem(AUTH_KEY);
+  window.localStorage.removeItem(TOKEN_KEY);
   emit();
 }
 
