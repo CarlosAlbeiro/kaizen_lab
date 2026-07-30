@@ -1,41 +1,22 @@
-# Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:20-alpine AS base
 
 WORKDIR /app
 
-# Copy package files
+# Copiar archivos de definición de dependencias
 COPY package*.json ./
 
-# Install all dependencies (including devDependencies for build)
-RUN npm install
+# Instalar dependencias de producción
+RUN npm ci --only=production
 
-# Copy source code and config
+# Copiar código fuente del backend
 COPY . .
 
-# Build the TypeScript project
-RUN npm run build
+# Crear carpeta para cargas de archivos si no existe
+RUN mkdir -p uploads
 
-# Stage 2: Production
-FROM node:20-alpine
-
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Install only production dependencies
-RUN npm install --omit=dev
-
-# Copy compiled files from builder stage
-COPY --from=builder /app/dist ./dist
-
-# Set environment variables (can be overridden at runtime)
-ENV PORT=3055
-ENV NODE_ENV=production
-ENV JWT_SECRET=kaizen_lab_super_secret_jwt_key_2026_production
-
-# Expose the port the app runs on
 EXPOSE 3055
 
-# Command to run the application
-CMD ["npm", "start"]
+ENV PORT=3055
+ENV NODE_ENV=production
+
+CMD ["node", "src/app.js"]
