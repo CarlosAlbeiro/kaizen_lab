@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Plus, Pencil, Trash2, Folder } from "lucide-react";
+import { Plus, Pencil, Trash2, Folder, Upload, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { uploadImageFile } from "@/lib/upload-api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,6 +37,22 @@ export default function AdminCollectionsPage() {
   const [draft, setDraft] = useState<DraftCollection>({});
   const [toDelete, setToDelete] = useState<CollectionData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadImageFile(file);
+      setDraft((prev) => ({ ...prev, image_url: url }));
+      toast.success("Imagen subida correctamente");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Error al subir imagen");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const openNew = () => {
     setDraft({ name: "", description: "", image_url: "", category_id: "", is_active: true });
@@ -205,14 +222,49 @@ export default function AdminCollectionsPage() {
               </select>
             </div>
             <div>
-              <Label htmlFor="img">URL de Imagen (opcional)</Label>
-              <Input
-                id="img"
-                value={draft.image_url || ""}
-                onChange={(e) => setDraft({ ...draft, image_url: e.target.value })}
-                className="mt-1.5 bg-background/50"
-                placeholder="https://..."
-              />
+              <Label htmlFor="img">Imagen de la Colección</Label>
+              <div className="mt-1.5 space-y-2">
+                {draft.image_url && (
+                  <div className="relative h-28 w-full overflow-hidden rounded-lg border border-white/10 bg-black/40">
+                    <img
+                      src={draft.image_url}
+                      alt="Previsualización"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex gap-2">
+                  <input
+                    type="file"
+                    id="collection-file-upload"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleFileUpload}
+                    disabled={uploading}
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    disabled={uploading}
+                    className="gap-2 border-white/10 bg-white/5 shrink-0"
+                    onClick={() => document.getElementById("collection-file-upload")?.click()}
+                  >
+                    {uploading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Upload className="h-4 w-4" />
+                    )}
+                    {uploading ? "Subiendo..." : "Subir Imagen"}
+                  </Button>
+                  <Input
+                    id="img"
+                    value={draft.image_url || ""}
+                    onChange={(e) => setDraft({ ...draft, image_url: e.target.value })}
+                    className="bg-background/50 flex-1 text-sm"
+                    placeholder="o URL (https://...)"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <DialogFooter className="mt-4">

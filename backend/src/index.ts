@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 
 import userRoutes from './routes/userRoutes';
 import categoryRoutes from './routes/categoryRoutes';
@@ -17,6 +18,7 @@ import brandRoutes from './routes/brandRoutes';
 import collectionRoutes from './routes/collectionRoutes';
 import productRoutes from './routes/productRoutes';
 import clientRoutes from './routes/clientRoutes';
+import uploadRoutes from './routes/uploadRoutes';
 import { whatsappBot } from './services/whatsappBot';
 
 dotenv.config();
@@ -26,6 +28,9 @@ const port = process.env.PORT || 3055;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve uploads folder static files
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Register API routes
 app.use('/api/users', userRoutes);
@@ -43,6 +48,7 @@ app.use('/api/brands', brandRoutes);
 app.use('/api/collections', collectionRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/clients', clientRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running' });
