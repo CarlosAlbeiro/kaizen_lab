@@ -50,5 +50,9 @@ app.get('/api/health', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  whatsappBot.init();
+  try {
+    whatsappBot.init();
+  } catch (err) {
+    console.error('Error starting WhatsApp bot:', err);
+  }
 });

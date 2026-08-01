@@ -26,11 +26,22 @@ class WhatsAppBotService {
   init({ sessionName = 'kaizenlab', onReady }: BotConfig = {}) {
     if (this.client) return this.client;
 
+    const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
+
     this.client = new Client({
       authStrategy: new LocalAuth({ clientId: sessionName }),
       puppeteer: {
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: executablePath || undefined,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-accelerated-2d-canvas',
+          '--no-first-run',
+          '--no-zygote',
+          '--disable-gpu',
+        ],
       },
     });
 
@@ -58,7 +69,10 @@ class WhatsAppBotService {
       }
     });
 
-    this.client.initialize();
+    this.client.initialize().catch((err) => {
+      console.error('Error initializing WhatsApp client (Puppeteer):', err.message);
+    });
+
     return this.client;
   }
 
