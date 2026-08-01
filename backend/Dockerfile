@@ -23,8 +23,13 @@ RUN mkdir -p uploads
 
 EXPOSE 3055
 
-ENV PORT=3055
-ENV NODE_ENV=production
-ENV JWT_SECRET=kaizen_lab_super_secret_jwt_key_2026_production
+# Argumento para URL de API en tiempo de build
+ARG PORT
+ARG NODE_ENV
+ARG JWT_SECRET
+
+ENV PORT=$PORT
+ENV NODE_ENV=$NODE_ENV
+ENV JWT_SECRET=$JWT_SECRET
 
 CMD ["npm", "start"]
