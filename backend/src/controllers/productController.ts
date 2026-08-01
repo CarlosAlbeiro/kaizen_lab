@@ -24,7 +24,12 @@ export const getProductById = async (req: Request, res: Response) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
-  const data = req.body;
+  const data = { ...req.body };
+  delete data.collection_name;
+  delete data.brand_name;
+  delete data.id;
+  delete data.created_at;
+
   const keys = Object.keys(data);
   const values = Object.values(data);
   const placeholders = values.map((_, i) => '$' + (i + 1)).join(', ');
@@ -42,8 +47,16 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const data = req.body;
+  const data = { ...req.body };
+  delete data.collection_name;
+  delete data.brand_name;
+  delete data.id;
+  delete data.created_at;
+
   const keys = Object.keys(data);
+  if (keys.length === 0) {
+    return res.status(400).json({ message: 'No fields to update' });
+  }
   const values = Object.values(data);
   
   const setString = keys.map((key, i) => key + ' = $' + (i + 1)).join(', ');
