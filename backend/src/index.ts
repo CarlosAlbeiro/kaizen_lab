@@ -20,6 +20,7 @@ import productRoutes from './routes/productRoutes';
 import clientRoutes from './routes/clientRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import { whatsappBot } from './services/whatsappBot';
+import { processPendingRequestsCore } from './controllers/serviceRequestController';
 
 dotenv.config();
 
@@ -54,11 +55,30 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running' });
 });
 
+/**
+ * Ciclo automático en segundo plano para procesar solicitudes pendientes en PostgreSQL
+ */
+function startAutoRequestProcessor(intervalMs = 30000) {
+  console.log(`⏱️ Ciclo automático de solicitudes activado (frecuencia: cada ${intervalMs / 1000}s)`);
+  setInterval(async () => {
+    try {
+      if (!whatsappBot.isReady()) return;
+      const result = await processPendingRequestsCore();
+      if (result.processedCount > 0) {
+        console.log(`🤖 [Ciclo Automático] Procesadas exitosamente ${result.processedCount} solicitudes pendientes.`);
+      }
+    } catch (err) {
+      console.error('Error en ciclo automático de procesamiento:', err);
+    }
+  }, intervalMs);
+}
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   try {
     whatsappBot.init();
+    startAutoRequestProcessor(30000);
   } catch (err) {
-    console.error('Error starting WhatsApp bot:', err);
+    console.error('Error starting WhatsApp bot or auto processor:', err);
   }
 });

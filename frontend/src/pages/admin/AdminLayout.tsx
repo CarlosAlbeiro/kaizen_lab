@@ -3,7 +3,6 @@ import {
   BarChart3,
   Cpu,
   LogOut,
-  Settings,
   Wrench,
   Users,
   Layout,
@@ -44,7 +43,6 @@ export default function AdminLayout() {
     { to: "/admin/solicitudes", label: "Solicitudes", icon: Inbox, exact: false },
     { to: "/admin/clientes", label: "Clientes", icon: Briefcase, exact: false },
     { to: "/admin/whatsapp", label: "WhatsApp", icon: MessageSquare, exact: false },
-    { to: "/admin/ajustes", label: "Ajustes", icon: Settings, exact: false },
   ] as const;
 
   return (

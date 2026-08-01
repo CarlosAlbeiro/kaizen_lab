@@ -48,8 +48,12 @@ export type ProductData = {
   image_url?: string;
   reference?: string;
   notes?: string;
+  collection_id?: string;
   collection_name?: string;
   brand_name?: string;
+  media?: string[];
+  is_promotion?: boolean;
+  is_active?: boolean;
 };
 
 export type BrandData = {
@@ -79,17 +83,17 @@ export async function getCatalogContact(): Promise<ContactData | null> {
 
 export async function getCatalogCollections(): Promise<CollectionData[]> {
   const data = await fetchJson<CollectionData[]>("/collections");
-  return data ?? [];
+  return Array.isArray(data) ? data : [];
 }
 
 export async function getCatalogProducts(): Promise<ProductData[]> {
   const data = await fetchJson<ProductData[]>("/products");
-  return data ?? [];
+  return Array.isArray(data) ? data : [];
 }
 
 export async function getCatalogBrands(): Promise<BrandData[]> {
   const data = await fetchJson<BrandData[]>("/brands");
-  return data ?? [];
+  return Array.isArray(data) ? data : [];
 }
 
 export function useCatalogProfile(refreshTrigger = 0) {
@@ -125,13 +129,13 @@ export function useCatalogCollections(refreshTrigger = 0) {
   useEffect(() => {
     let active = true;
     getCatalogCollections().then((data) => {
-      if (active) setCollections(data);
+      if (active) setCollections(Array.isArray(data) ? data : []);
     });
     return () => {
       active = false;
     };
   }, [refreshTrigger]);
-  return collections;
+  return Array.isArray(collections) ? collections : [];
 }
 
 export function useCatalogProducts(refreshTrigger = 0) {
@@ -139,13 +143,13 @@ export function useCatalogProducts(refreshTrigger = 0) {
   useEffect(() => {
     let active = true;
     getCatalogProducts().then((data) => {
-      if (active) setProducts(data);
+      if (active) setProducts(Array.isArray(data) ? data : []);
     });
     return () => {
       active = false;
     };
   }, [refreshTrigger]);
-  return products;
+  return Array.isArray(products) ? products : [];
 }
 
 export function useCatalogBrands(refreshTrigger = 0) {
@@ -153,20 +157,26 @@ export function useCatalogBrands(refreshTrigger = 0) {
   useEffect(() => {
     let active = true;
     getCatalogBrands().then((data) => {
-      if (active) setBrands(data);
+      if (active) setBrands(Array.isArray(data) ? data : []);
     });
     return () => {
       active = false;
     };
   }, [refreshTrigger]);
-  return brands;
+  return Array.isArray(brands) ? brands : [];
 }
 
 // Mutations
 async function mutateJson<T>(path: string, method: string, body?: any): Promise<T> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("cab_admin_jwt_token_v1") : null;
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API_URL}${path}`, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: body ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) {

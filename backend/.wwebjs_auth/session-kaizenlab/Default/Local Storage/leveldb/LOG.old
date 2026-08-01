@@ -1,3 +1,2 @@
-2026/07/14-22:56:56.029 6a80 Reusing MANIFEST C:\Users\DEV.CAGG\Desktop\KAIZEN_LAB\backend\.wwebjs_auth\session-kaizenlab\Default\Local Storage\leveldb/MANIFEST-000001
-2026/07/14-22:56:56.036 6a80 Recovering log #3
-2026/07/14-22:56:56.039 6a80 Reusing old log C:\Users\DEV.CAGG\Desktop\KAIZEN_LAB\backend\.wwebjs_auth\session-kaizenlab\Default\Local Storage\leveldb/000003.log 
+2026/08/01-14:50:49.529 302c Creating DB C:\Users\DEV.CAGG\Desktop\KAIZEN_LAB\backend\.wwebjs_auth\session-kaizenlab\Default\Local Storage\leveldb since it was missing.
+2026/08/01-14:50:49.554 302c Reusing MANIFEST C:\Users\DEV.CAGG\Desktop\KAIZEN_LAB\backend\.wwebjs_auth\session-kaizenlab\Default\Local Storage\leveldb/MANIFEST-000001

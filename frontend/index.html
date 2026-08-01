@@ -3,22 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="src/assets/logo.png" />
-    <title>galeo tek — Soluciones tecnológicas para tu hogar y negocio</title>
+    <link rel="icon" type="image/png" href="/src/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/src/assets/logo.png" />
+    
+    <!-- Optimización de Rendimiento y DNS Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+    <!-- Título y Descripción Primaria SEO -->
+    <title>Cuadros de Aluminio en Armenia Quindío | KAIZEN LAB — Posters Metálicos HD</title>
     <meta
       name="description"
-      content="Software, electricidad, cámaras y asesoría tecnológica en Armenia, Quindío. Soluciones reales para tu hogar y emprendimiento."
+      content="Venta de cuadros de aluminio de alta calidad en Armenia, Quindío. Posters metálicos sublimados HD de larga durabilidad para decoración moderna, gaming y oficinas. Envíos en Armenia y todo Colombia."
     />
-    <meta name="author" content="galeo tek" />
-    <meta property="og:title" content="galeo tek — Tecnología integral" />
+    <meta
+      name="keywords"
+      content="cuadros de aluminio armenia, cuadros metalicos quindio, posters metalicos armenia, cuadros sublimados armenia, decoracion de pared armenia, arte metalico colombia, cuadros para gaming armenia, kaizen lab"
+    />
+    <meta name="author" content="KAIZEN LAB" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://kaizenlab.co/" />
+
+    <!-- Geo-Posicionamiento Local SEO (Armenia, Quindío) -->
+    <meta name="geo.region" content="CO-QUI" />
+    <meta name="geo.placename" content="Armenia, Quindío, Colombia" />
+    <meta name="geo.position" content="4.53389;-75.68111" />
+    <meta name="ICBM" content="4.53389, -75.68111" />
+
+    <!-- Open Graph / Social Media (Facebook, WhatsApp, Instagram) -->
+    <meta property="og:site_name" content="KAIZEN LAB" />
+    <meta property="og:title" content="Cuadros de Aluminio en Armenia Quindío | KAIZEN LAB" />
     <meta
       property="og:description"
-      content="Software, electricidad, cámaras y asesoría en un solo lugar."
+      content="Transforma tus paredes con posters metálicos y cuadros de aluminio de alta definición. Diseños exclusivos y acabado brillante inalterable en Armenia, Quindío."
     />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://kaizenlab.co/" />
+    <meta property="og:image" content="/src/assets/logo.png" />
+    <meta property="og:locale" content="es_CO" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cuadros de Aluminio en Armenia Quindío | KAIZEN LAB" />
+    <meta
+      name="twitter:description"
+      content="Posters metálicos y cuadros de aluminio sublimados en HD. Diseñados y elaborados en Armenia, Quindío para todo Colombia."
+    />
+    <meta name="twitter:image" content="/src/assets/logo.png" />
+
+    <!-- Datos Estructurados JSON-LD (Schema.org) para Posicionamiento Local en Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "KAIZEN LAB",
+        "image": "https://kaizenlab.co/src/assets/logo.png",
+        "@id": "https://kaizenlab.co/#store",
+        "url": "https://kaizenlab.co/",
+        "telephone": "+57 320 000 0000",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Centro de Armenia",
+          "addressLocality": "Armenia",
+          "addressRegion": "Quindío",
+          "postalCode": "630001",
+          "addressCountry": "CO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 4.53389,
+          "longitude": -75.68111
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "08:00",
+          "closes": "19:00"
+        },
+        "sameAs": [
+          "https://instagram.com/",
+          "https://facebook.com/"
+        ],
+        "areaServed": [
+          "Armenia",
+          "Quindío",
+          "Eje Cafetero",
+          "Colombia"
+        ],
+        "description": "Empresa especializada en la producción y venta de cuadros de aluminio de alta calidad, posters metálicos sublimados HD y decoración moderna de pared en Armenia, Quindío."
+      }
+    </script>
   </head>
-  <body>
+  <body class="bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

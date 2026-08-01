@@ -259,13 +259,13 @@ export default function AdminProductsPage() {
                 <Label htmlFor="col">Colección</Label>
                 <select
                   id="col"
-                  className="mt-1.5 flex h-10 w-full items-center justify-between rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  value={draft.collection_name || ""}
-                  onChange={(e) => setDraft({ ...draft, collection_name: e.target.value })}
+                  className="mt-1.5 flex h-10 w-full items-center justify-between rounded-md border border-input bg-white/5 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                  value={draft.collection_id || ""}
+                  onChange={(e) => setDraft({ ...draft, collection_id: e.target.value || null })}
                 >
-                  <option value="">Ninguna</option>
+                  <option value="" className="bg-[#1a1a1a] text-white">Ninguna</option>
                   {collections.map((c) => (
-                    <option key={c.id} value={c.name}>
+                    <option key={c.id} value={c.id} className="bg-[#1a1a1a] text-white">
                       {c.name}
                     </option>
                   ))}

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { WhatsAppFAB } from "./WhatsAppFAB";
+import { CartDrawer } from "./CartDrawer";
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -10,6 +11,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <main className="pt-16">{children}</main>
       <Footer />
       <WhatsAppFAB />
+      <CartDrawer />
     </div>
   );
 }

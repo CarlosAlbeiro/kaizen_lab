@@ -4,15 +4,18 @@ import {
   getServiceRequestById,
   createServiceRequest,
   updateServiceRequest,
-  deleteServiceRequest
+  deleteServiceRequest,
+  processPendingRequests
 } from '../controllers/serviceRequestController';
+import { authenticateToken } from '../middleware/authMiddleware';
 
 const router = Router();
 
 router.get('/', getAllServiceRequests);
+router.post('/process-pending', processPendingRequests);
 router.get('/:id', getServiceRequestById);
 router.post('/', createServiceRequest);
-router.put('/:id', updateServiceRequest);
-router.delete('/:id', deleteServiceRequest);
+router.put('/:id', authenticateToken, updateServiceRequest);
+router.delete('/:id', authenticateToken, deleteServiceRequest);
 
 export default router;

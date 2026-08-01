@@ -1,21 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Menu, Sparkles, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 import profileImage from "@/assets/logo.png";
 
 const links = [
   { to: "/", label: "Inicio" },
   { to: "/catalogo", label: "Catálogo" },
-  { to: "/servicios", label: "Colecciones" },
-  { to: "/paquetes", label: "Paquetes" },
   { to: "/nosotros", label: "Nosotros" },
-  { to: "/contacto", label: "Contacto" },
 ] as const;
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { totalItems, setIsCartOpen } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -43,34 +42,50 @@ export function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
-          {links.map((l) => (
-            <NavLink
-              key={l.to}
-              to={l.to}
-              end={l.to === "/"}
-              className={({ isActive }) =>
-                cn(
-                  "relative overflow-hidden rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-300",
-                  isActive
-                    ? "border border-primary/50 bg-primary/10 text-primary drop-shadow-[0_0_8px_rgba(220,38,38,0.8)] shadow-[inset_0_0_10px_rgba(220,38,38,0.2)]"
-                    : "border border-transparent text-muted-foreground hover:border-white/10 hover:bg-white/5 hover:text-foreground",
-                )
-              }
-            >
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
+        <div className="flex items-center gap-3">
+          <nav className="hidden items-center gap-1 md:flex">
+            {links.map((l) => (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                end={l.to === "/"}
+                className={({ isActive }) =>
+                  cn(
+                    "relative overflow-hidden rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-300",
+                    isActive
+                      ? "border border-primary/50 bg-primary/10 text-primary drop-shadow-[0_0_8px_rgba(220,38,38,0.8)] shadow-[inset_0_0_10px_rgba(220,38,38,0.2)]"
+                      : "border border-transparent text-muted-foreground hover:border-white/10 hover:bg-white/5 hover:text-foreground",
+                  )
+                }
+              >
+                {l.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <button
-          type="button"
-          aria-label="Abrir menú"
-          onClick={() => setOpen((v) => !v)}
-          className="grid h-10 w-10 place-items-center rounded-md border border-white/10 md:hidden"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          {/* Botón Carrito de Compras */}
+          <button
+            onClick={() => setIsCartOpen(true)}
+            aria-label="Ver Carrito de Cotización"
+            className="relative grid h-10 w-10 place-items-center rounded-full border border-primary/30 bg-primary/10 text-primary transition-transform hover:scale-105 shadow-glow"
+          >
+            <ShoppingBag className="h-5 w-5" />
+            {totalItems > 0 && (
+              <span className="absolute -top-1 -right-1 grid h-5 w-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground border-2 border-background animate-pulse-glow shadow-glow">
+                {totalItems}
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            aria-label="Abrir menú"
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-10 w-10 place-items-center rounded-md border border-white/10 md:hidden"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (

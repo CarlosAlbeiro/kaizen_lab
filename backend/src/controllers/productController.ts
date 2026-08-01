@@ -1,7 +1,22 @@
 import { Request, Response } from 'express';
 import { pool } from '../config/db';
 
-export const getAllProducts = async (req: Request, res: Response) => {
+const sanitizeKeys = (data: Record<string, any>) => {
+  const cleanData = { ...data };
+  delete cleanData.id;
+  delete cleanData.created_at;
+  delete cleanData.updated_at;
+  delete cleanData.collection_name;
+  delete cleanData.brand_name;
+  delete cleanData.category_name;
+
+  const validKeys = Object.keys(cleanData).filter((key) => /^[a-zA-Z0-9_]+$/.test(key));
+  const validValues = validKeys.map((key) => cleanData[key]);
+
+  return { validKeys, validValues };
+};
+
+export const getAllProducts = async (_req: Request, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM products ORDER BY id ASC');
     res.json(result.rows);
@@ -24,20 +39,17 @@ export const getProductById = async (req: Request, res: Response) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
-  const data = { ...req.body };
-  delete data.collection_name;
-  delete data.brand_name;
-  delete data.id;
-  delete data.created_at;
+  const { validKeys, validValues } = sanitizeKeys(req.body);
+  if (validKeys.length === 0) {
+    return res.status(400).json({ error: 'No valid fields provided' });
+  }
 
-  const keys = Object.keys(data);
-  const values = Object.values(data);
-  const placeholders = values.map((_, i) => '$' + (i + 1)).join(', ');
-  
+  const placeholders = validValues.map((_, i) => '$' + (i + 1)).join(', ');
+
   try {
     const result = await pool.query(
-      'INSERT INTO products (' + keys.join(', ') + ') VALUES (' + placeholders + ') RETURNING *',
-      values
+      `INSERT INTO products (${validKeys.join(', ')}) VALUES (${placeholders}) RETURNING *`,
+      validValues
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -47,25 +59,18 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const data = { ...req.body };
-  delete data.collection_name;
-  delete data.brand_name;
-  delete data.id;
-  delete data.created_at;
-
-  const keys = Object.keys(data);
-  if (keys.length === 0) {
+  const { validKeys, validValues } = sanitizeKeys(req.body);
+  if (validKeys.length === 0) {
     return res.status(400).json({ message: 'No fields to update' });
   }
-  const values = Object.values(data);
-  
-  const setString = keys.map((key, i) => key + ' = $' + (i + 1)).join(', ');
-  values.push(id);
-  
+
+  const setString = validKeys.map((key, i) => `${key} = $${i + 1}`).join(', ');
+  validValues.push(id);
+
   try {
     const result = await pool.query(
-      'UPDATE products SET ' + setString + ' WHERE id = $' + values.length + ' RETURNING *',
-      values
+      `UPDATE products SET ${setString} WHERE id = $${validValues.length} RETURNING *`,
+      validValues
     );
     if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Product not found' });

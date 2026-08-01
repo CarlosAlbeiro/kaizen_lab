@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { Frame, HeartHandshake, Sparkles, Star } from "lucide-react";
+import { Frame, HeartHandshake, Sparkles, Star, MapPin } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
+import { SEO } from "@/components/site/SEO";
 import { useCatalogProfile } from "@/lib/catalog";
 import { SITE } from "@/lib/site";
 
@@ -12,36 +12,43 @@ const VALUES = [
   },
   {
     icon: Star,
-    title: "Calidad superior",
-    text: "Trabajamos con materiales resistentes y acabados cuidadosamente seleccionados.",
+    title: "Calidad superior en aluminio",
+    text: "Trabajamos con láminas de aluminio de alta densidad e impresiones HD sublimadas inalterables.",
   },
   {
     icon: HeartHandshake,
-    title: "Atención cercana",
-    text: "Te acompañamos desde la idea hasta el montaje para que el resultado sea perfecto.",
+    title: "Atención directa en Armenia",
+    text: "Te acompañamos desde la idea hasta el despacho para que tu experiencia sea perfecta.",
   },
 ];
 
 export default function AboutPage() {
   const profile = useCatalogProfile();
-  useEffect(() => {
-    document.title = "Nosotros — KAIZEN LAB";
-  }, []);
+
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-6xl px-4 pb-10 pt-12 sm:px-6 sm:pt-20">
+      <SEO
+        title="Sobre KAIZEN LAB | Cuadros de Aluminio en Armenia Quindío"
+        description="Conoce más sobre KAIZEN LAB, empresa líder en producción de cuadros de aluminio y posters metálicos en Armenia, Quindío. Calidad HD y envíos a todo Colombia."
+        keywords="empresa cuadros de aluminio armenia, sobre kaizen lab quindio, fabrica de posters metalicos armenia, arte metalico eje cafetero"
+        canonical="https://kaizenlab.co/nosotros"
+      />
+
+      <section className="mx-auto max-w-6xl px-4 pb-10 pt-24 sm:px-6 sm:pt-28">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
-            <span className="text-xs uppercase tracking-[0.2em] text-primary">Sobre nosotros</span>
-            <h1 className="mt-2 text-4xl font-bold sm:text-5xl">
-              Decoración <span className="gradient-text">premium</span> con identidad propia
+            <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-primary mb-2">
+              <MapPin className="h-3.5 w-3.5" /> Ubiados en Armenia, Quindío
+            </div>
+            <h1 className="text-4xl font-extrabold sm:text-5xl leading-tight">
+              Cuadros de aluminio y posters metálicos con <span className="gradient-text">identidad propia</span>
             </h1>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-muted-foreground leading-relaxed">
               {profile?.bio ||
-                `${SITE.name} nace para llevar diseños de alto impacto a espacios cotidianos. Creamos posters metálicos y cuadros de aluminio que combinan estética, calidad y personalidad.`}
+                `En KAIZEN LAB nos dedicamos a transformar paredes con cuadros de aluminio de alta definición y posters metálicos. Diseñamos y producimos desde Armenia, Quindío para clientes exigentes en todo Colombia.`}
             </p>
             <p className="mt-3 text-muted-foreground">
-              Atendemos pedidos personalizados y {SITE.coverage.toLowerCase()}.
+              Atendemos pedidos personalizados en Armenia, el Eje Cafetero y con envíos seguros a todo el país.
             </p>
           </div>
           <div className="relative">
@@ -57,7 +64,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-3xl font-bold">Cómo trabajamos</h2>
+        <h2 className="text-center text-3xl font-bold">Por qué elegir nuestros cuadros metálicos en Armenia</h2>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {VALUES.map((v) => (
             <div
@@ -68,7 +75,7 @@ export default function AboutPage() {
                 <v.icon className="h-5 w-5 text-primary-foreground" />
               </div>
               <h3 className="mt-4 text-lg font-semibold">{v.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{v.text}</p>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{v.text}</p>
             </div>
           ))}
         </div>

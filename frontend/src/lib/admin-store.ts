@@ -1,5 +1,5 @@
 /**
- * Admin store integrated with Backend API.
+ * Admin store integrated with Backend API and automatic JWT expiration handling.
  */
 import { useEffect, useState, useSyncExternalStore } from "react";
 
@@ -9,32 +9,63 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 export type ServiceItem = {
   id: string;
-  icon: string; // lucide icon name
+  icon: string;
   title: string;
   description: string;
   active: boolean;
 };
 
-// ---------- state ----------
 let services: ServiceItem[] = [];
 let isInitialLoaded = false;
 
-// ---------- listeners ----------
 type Listener = () => void;
 const listeners = new Set<Listener>();
 const emit = () => listeners.forEach((l) => l());
 
 const isBrowser = () => typeof window !== "undefined";
 
-// ---------- auth ----------
+/**
+ * Valida si un token JWT ha expirado leyendo la propiedad 'exp' de su payload.
+ */
+export function isJwtExpired(token: string): boolean {
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 3) return true;
+    const payload = JSON.parse(atob(parts[1]));
+    if (payload.exp && typeof payload.exp === "number") {
+      // Comparar tiempo actual con la fecha de expiración exp (en ms)
+      return Date.now() >= payload.exp * 1000;
+    }
+    return false;
+  } catch {
+    return true;
+  }
+}
+
 export function getToken(): string | null {
   if (!isBrowser()) return null;
-  return window.localStorage.getItem(TOKEN_KEY);
+  const token = window.localStorage.getItem(TOKEN_KEY);
+  if (!token) return null;
+  if (isJwtExpired(token)) {
+    logout();
+    return null;
+  }
+  return token;
 }
 
 export function isAuthed(): boolean {
   if (!isBrowser()) return false;
-  return Boolean(window.localStorage.getItem(TOKEN_KEY) || window.localStorage.getItem(AUTH_KEY) === "1");
+  const token = window.localStorage.getItem(TOKEN_KEY);
+  if (!token) {
+    // Si no hay token, verificar si había un flag viejo y limpiarlo
+    window.localStorage.removeItem(AUTH_KEY);
+    return false;
+  }
+  if (isJwtExpired(token)) {
+    logout();
+    return false;
+  }
+  return true;
 }
 
 export async function login(username: string, password: string): Promise<boolean> {
@@ -61,6 +92,7 @@ export async function login(username: string, password: string): Promise<boolean
 }
 
 export function logout() {
+  if (!isBrowser()) return;
   window.localStorage.removeItem(AUTH_KEY);
   window.localStorage.removeItem(TOKEN_KEY);
   emit();
@@ -85,9 +117,7 @@ async function fetchServices() {
     const res = await fetch(`${API_URL}/services`);
     if (res.ok) {
       const data = await res.json();
-      // Ensure IDs are strings for frontend consistency if needed,
-      // but backend returns numbers now.
-      services = data.map((s: any) => ({ ...s, id: String(s.id) }));
+      services = (Array.isArray(data) ? data : []).map((s: any) => ({ ...s, id: String(s.id) }));
       isInitialLoaded = true;
       emit();
     }
@@ -141,8 +171,6 @@ export async function deleteService(id: string) {
 }
 
 export async function resetServices() {
-  // En una app real, esto podría borrar todo y re-insertar defaults.
-  // Por ahora lo ignoramos o relanzamos fetch.
   await fetchServices();
 }
 
@@ -164,7 +192,6 @@ export function useServices(): ServiceItem[] {
   return useSyncExternalStore(subscribe, get, () => []);
 }
 
-// Initial fetch if in browser
 if (isBrowser()) {
   fetchServices();
 }
