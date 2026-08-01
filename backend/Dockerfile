@@ -1,22 +1,30 @@
-FROM node:20-alpine AS base
+# Stage 1: Build
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copiar archivos de definición de dependencias
 COPY package*.json ./
+RUN npm install
 
-# Instalar dependencias de producción
-RUN npm ci --only=production
-
-# Copiar código fuente del backend
 COPY . .
+RUN npm run build
 
-# Crear carpeta para cargas de archivos si no existe
+# Stage 2: Production
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --omit=dev
+
+COPY --from=builder /app/dist ./dist
+
 RUN mkdir -p uploads
 
 EXPOSE 3055
 
 ENV PORT=3055
 ENV NODE_ENV=production
+ENV JWT_SECRET=kaizen_lab_super_secret_jwt_key_2026_production
 
-CMD ["node", "src/app.js"]
+CMD ["npm", "start"]
